@@ -1,0 +1,85 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int dp[8][120002];//dp[i][j]代表选第i中宝石时，j是否可能取到
+//dp[i][j]=dp[i-1][j-i*x]
+int marible[8];
+int total=0;
+
+void init()
+{
+	int count;
+	total=0;
+	for(count=1;count<=6;count++)
+	{
+		cin>>marible[count];
+		marible[count] %=30;
+		total += marible[count]*count;
+	}
+}
+
+void cal()
+{
+	int i,j,x;
+
+	memset(dp,0,sizeof(dp));
+	dp[1][0]=1;
+	for(i=1;i<=marible[1];i++)
+		dp[1][i]=1;
+
+	for(i=2;i<=6;i++)
+	{
+		for(j=0;j<=total;j++)
+		{
+			if(dp[i][j])
+				continue;
+			dp[i][j]=dp[i-1][j];
+			if(dp[i-1][j])
+			{
+				for(x=1;x<=marible[i];x++)
+				{
+					dp[i][j+x*i]=dp[i-1][j];
+				}
+			}
+		}
+	}
+
+}
+
+int main()
+{
+	bool end = true;
+	int t=0;
+	while(end)
+	{
+		t++;
+
+		init();
+		if(total==0)
+		{
+			return 0;
+		}
+		if(total%2)
+		{
+			cout<<"Collection #"<<t<<":"<<endl;
+			cout<<"Can't be divided."<<endl<<endl;
+		}
+		else
+		{
+			total /=2;
+			cal();
+			if(dp[6][total])
+			{	
+				cout<<"Collection #"<<t<<":"<<endl;
+				cout<<"Can be divided."<<endl<<endl;
+			}
+			else
+			{
+				cout<<"Collection #"<<t<<":"<<endl;
+				cout<<"Can't be divided."<<endl<<endl;
+			}
+		}
+	}
+	return 0;
+}

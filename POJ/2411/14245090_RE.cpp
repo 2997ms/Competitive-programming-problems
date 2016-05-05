@@ -1,0 +1,89 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+#define M 12
+
+long long dp[12][1<<M];
+int n,m;
+
+int init_ok(int i)
+{
+		for(int k = 0 ; k <m; )
+	{
+		if(i & (1<<k))
+		{
+			if(k == m-1 || !(i & (1<<(k+1))))
+				return false;
+
+			k+= 2;
+		}
+		else k ++;
+	}
+	return true;
+}
+
+void init()
+{
+	int count;
+	int kongjian = (1<<m)-1;
+
+	memset(dp,0,sizeof(dp));
+
+	for(count=0;count<=kongjian;count++)
+	{
+		if(init_ok(count))
+			dp[0][count]=1;
+	}
+}
+
+bool match(int a, int b)
+{
+	for (int i = 1; i < 1 << m;)
+	{
+		if (((a & i) == 0) && ((b & i) == 0))
+			return false;
+		if ((a & i) && (b & i))
+		{
+			if ((a & (i << 1)) && ((b & (i << 1))))
+			{
+				i <<= 2;
+				continue;
+			}
+			else
+				return false;
+		}
+		i <<= 1;
+	}
+	return true;
+}
+
+int main()
+{
+
+	while(scanf("%d%d,&n,&m"),n&&m)
+	{
+		int i,shang,xia;
+		int kongjian = (1<<m)-1;
+
+		if(n < m)//将状态数取小，优化处理
+			i = n ,n = m,n =i;
+		init();
+
+		for(i=1;i<n;i++)
+		{
+			for(xia = 0;xia<=kongjian;xia++)
+			{
+				for(shang=0;shang<=kongjian;shang++)
+				{
+					if(match(shang,xia) )
+						dp[i][xia]+=dp[i-1][shang];
+
+				}
+			}
+		}
+		cout<<dp[n-1][kongjian]<<endl;
+	}
+
+	return 0;
+}

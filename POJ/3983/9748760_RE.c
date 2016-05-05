@@ -1,0 +1,254 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int jia(int a,int b)
+{
+	return a+b;
+}
+int jian(int a,int b)
+{
+	return a-b;
+}
+int cheng(int a,int b)
+{
+	return a*b;
+}
+int chu(int a,int b)
+{
+	return a/b;
+}
+
+main()
+{
+	int a,b,c,d;
+
+	scanf("%d%d%d%d",&a,&b,&c,&d);
+
+	if(jia(jia(jia(a,b),c),d)==24)
+		printf("%d+%d+%d+%d",a,b,c,d);
+if(jia(jia(jian(a,b),c),d)==24)
+		printf("%d-%d+%d+%d",a,b,c,d);//1
+if(jia(jia(cheng(a,b),c),d)==24)
+		printf("%d*%d+%d+%d",a,b,c,d);
+if(jia(jia(chu(a,b),c),d)==24)
+		printf("%d/%d+%d+%d",a,b,c,d);
+if(jia(jian(jia(a,b),c),d)==24)
+		printf("%d+%d-%d+%d",a,b,c,d);
+if(jia(jian(jian(a,b),c),d)==24)
+		printf("%d-%d-%d+%d",a,b,c,d);
+if(jia(jian(cheng(a,b),c),d)==24)
+		printf("%d*%d-%d+%d",a,b,c,d);
+if(jia(jian(chu(a,b),c),d)==24)
+		printf("%d/%d-%d+%d",a,b,c,d);
+if(jia(cheng(jia(a,b),c),d)==24)
+		printf("(%d+%d)*%d+%d",a,b,c,d);
+if(jia(cheng(jian(a,b),c),d)==24)
+		printf("(%d-%d)*%d+%d",a,b,c,d);
+if(jia(cheng(cheng(a,b),c),d)==24)
+		printf("%d*%d*%d+%d",a,b,c,d);
+if(jia(cheng(chu(a,b),c),d)==24)
+		printf("%d/%d*%d+%d",a,b,c,d);
+if(jia(chu(jia(a,b),c),d)==24)
+		printf("(%d+%d)/%d+%d",a,b,c,d);
+if(jia(chu(jian(a,b),c),d)==24)
+		printf("(%d-%d)/%d+%d",a,b,c,d);
+if(jia(chu(cheng(a,b),c),d)==24)
+		printf("%d*%d/%d+%d",a,b,c,d);
+if(jia(chu(chu(a,b),c),d)==24)
+		printf("%d/%d/%d+%d",a,b,c,d);
+	if(jian(jia(jia(a,b),c),d)==24)
+		printf("%d+%d+%d-%d",a,b,c,d);
+if(jian(jia(jian(a,b),c),d)==24)
+		printf("%d-%d+%d-%d",a,b,c,d);
+if(jian(jia(cheng(a,b),c),d)==24)
+		printf("%d*%d+%d-%d",a,b,c,d);
+if(jian(jia(chu(a,b),c),d)==24)
+		printf("%d/%d+%d-%d",a,b,c,d);
+if(jian(jian(jia(a,b),c),d)==24)
+		printf("%d+%d-%d-%d",a,b,c,d);
+if(jian(jian(jian(a,b),c),d)==24)
+		printf("%d-%d-%d-%d",a,b,c,d);
+if(jian(jian(cheng(a,b),c),d)==24)
+		printf("%d*%d-%d-%d",a,b,c,d);
+if(jian(jian(chu(a,b),c),d)==24)
+		printf("%d/%d-%d-%d",a,b,c,d);
+if(jian(cheng(jia(a,b),c),d)==24)
+		printf("(%d+%d)*%d-%d",a,b,c,d);
+if(jian(cheng(jian(a,b),c),d)==24)
+		printf("(%d-%d)*%d-%d",a,b,c,d);
+if(jian(cheng(cheng(a,b),c),d)==24)
+		printf("%d*%d*%d-%d",a,b,c,d);
+if(jian(cheng(chu(a,b),c),d)==24)
+		printf("%d/%d*%d-%d",a,b,c,d);
+if(jian(chu(jia(a,b),c),d)==24)
+		printf("(%d+%d)/%d-%d",a,b,c,d);
+if(jian(chu(jian(a,b),c),d)==24)
+		printf("(%d-%d)/%d-%d",a,b,c,d);
+if(jian(chu(cheng(a,b),c),d)==24)
+		printf("%d*%d/%d-%d",a,b,c,d);
+if(jian(chu(chu(a,b),c),d)==24)
+		printf("%d/%d/%d-%d",a,b,c,d);
+         	if(cheng(jia(jia(a,b),c),d)==24)
+		printf("(%d+%d+%d)*%d",a,b,c,d);
+if(cheng(jia(jian(a,b),c),d)==24)
+		printf("(%d-%d+%d)*%d",a,b,c,d);
+if(cheng(jia(cheng(a,b),c),d)==24)
+		printf("(%d*%d+%d)*%d",a,b,c,d);
+if(cheng(jia(chu(a,b),c),d)==24)
+		printf("(%d/%d+%d)*%d",a,b,c,d);
+if(cheng(jian(jia(a,b),c),d)==24)
+		printf("(%d+%d-%d)*%d",a,b,c,d);
+if(cheng(jian(jian(a,b),c),d)==24)
+		printf("(%d-%d-%d)*%d",a,b,c,d);
+if(cheng(jian(cheng(a,b),c),d)==24)
+		printf("(%d*%d-%d)*%d",a,b,c,d);
+if(cheng(jian(chu(a,b),c),d)==24)
+		printf("(%d/%d-%d)*%d",a,b,c,d);
+if(cheng(cheng(jia(a,b),c),d)==24)
+		printf("(%d+%d)*%d*%d",a,b,c,d);
+if(cheng(cheng(jian(a,b),c),d)==24)
+		printf("(%d-%d)*%d*%d",a,b,c,d);
+if(cheng(cheng(cheng(a,b),c),d)==24)
+		printf("%d*%d*%d*%d",a,b,c,d);
+if(cheng(cheng(chu(a,b),c),d)==24)
+		printf("%d/%d*%d*%d",a,b,c,d);
+if(cheng(chu(jia(a,b),c),d)==24)
+		printf("(%d+%d)/%d*%d",a,b,c,d);
+if(cheng(chu(jian(a,b),c),d)==24)
+		printf("(%d-%d)/%d*%d",a,b,c,d);
+if(cheng(chu(cheng(a,b),c),d)==24)
+		printf("%d*%d/%d*%d",a,b,c,d);
+if(cheng(chu(chu(a,b),c),d)==24)
+		printf("%d/%d/%d*%d",a,b,c,d);
+            	if(chu(jia(jia(a,b),c),d)==24)
+		printf("(%d+%d+%d)/%d",a,b,c,d);
+if(chu(jia(jian(a,b),c),d)==24)
+		printf("(%d-%d+%d)/%d",a,b,c,d);
+if(chu(jia(cheng(a,b),c),d)==24)
+		printf("(%d*%d+%d)/%d",a,b,c,d);
+if(chu(jia(chu(a,b),c),d)==24)
+		printf("(%d/%d+%d)/%d",a,b,c,d);
+if(chu(jian(jia(a,b),c),d)==24)
+		printf("(%d+%d-%d)/%d",a,b,c,d);
+if(chu(jian(jian(a,b),c),d)==24)
+		printf("(%d-%d-%d)/%d",a,b,c,d);
+if(chu(jian(cheng(a,b),c),d)==24)
+		printf("(%d*%d-%d)/%d",a,b,c,d);
+if(chu(jian(chu(a,b),c),d)==24)
+		printf("(%d/%d-%d)/%d",a,b,c,d);
+if(chu(cheng(jia(a,b),c),d)==24)
+		printf("(%d+%d)*%d/%d",a,b,c,d);
+if(chu(cheng(jian(a,b),c),d)==24)
+		printf("(%d-%d)*%d/%d",a,b,c,d);
+if(chu(cheng(cheng(a,b),c),d)==24)
+		printf("%d*%d*%d/%d",a,b,c,d);
+if(chu(cheng(chu(a,b),c),d)==24)
+		printf("%d/%d*%d/%d",a,b,c,d);
+if(chu(chu(jia(a,b),c),d)==24)
+		printf("(%d+%d)/%d/%d",a,b,c,d);
+if(chu(chu(jian(a,b),c),d)==24)
+		printf("(%d-%d)/%d/%d",a,b,c,d);
+if(chu(chu(cheng(a,b),c),d)==24)
+		printf("%d*%d/%d/%d",a,b,c,d);
+if(chu(chu(chu(a,b),c),d)==24)
+		printf("%d/%d/%d/%d",a,b,c,d); 
+    
+   if(jia(jia(cheng(b,c),d),a)==24)
+		printf("%d+(%d*%d)+%d",a,b,c,d);
+if(jia(jia(chu(b,c),d),a)==24)
+		printf("%d+(%d/%d)+%d",a,b,c,d);
+if(jia(jian(cheng(b,c),d),a)==24)
+		printf("%d+(%d*%d)-%d",a,b,c,d);
+if(jia(jian(chu(b,c),d),a)==24)
+		printf("%d+%d/%d-%d",a,b,c,d);
+if(jia(cheng(cheng(b,c),d),a)==24)
+		printf("%d+(%d*%d*%d)",a,b,c,d);
+if(jia(cheng(chu(b,c),d),a)==24)
+		printf("%d+(%d/%d*%d)",a,b,c,d);
+if(jia(chu(jia(b,c),d),a)==24)
+		printf("(%d+((%d+%d)/%d)",a,b,c,d);
+if(jia(chu(jian(b,c),d),a)==24)
+		printf("(%d+((%d-%d)/%d)",a,b,c,d);
+if(jia(chu(cheng(b,c),d),a)==24)
+		printf("%d+(%d*%d/%d)",a,b,c,d);//
+if(jia(chu(chu(b,c),d),a)==24)
+		printf("%d+(%d/%d/%d)",a,b,c,d);
+         	if(cheng(jia(jia(b,c),d),a)==24)
+		printf("%d*(%d+%d+%d)",a,b,c,d);
+if(cheng(jia(jian(b,c),d),a)==24)
+		printf("%d*(%d-%d+%d)",a,b,c,d);
+if(cheng(jia(cheng(b,c),d),a)==24)
+		printf("%d*(%d*%d+%d)",a,b,c,d);
+if(cheng(jia(chu(b,c),d),a)==24)
+		printf("%d*((%d/%d)+%d)",a,b,c,d);
+if(cheng(jian(jia(b,c),d),a)==24)
+		printf("%d*(%d+%d-%d)",a,b,c,d);
+if(cheng(jian(jian(b,c),d),a)==24)
+		printf("%d*(%d-%d-%d)",a,b,c,d);
+if(cheng(jian(cheng(b,c),d),a)==24)
+		printf("%d*(%d*%d-%d)",a,b,c,d);
+if(cheng(jian(chu(b,c),d),a)==24)
+		printf("(%d*(%d/%d-%d)",a,b,c,d);
+if(cheng(cheng(jia(b,c),d),a)==24)
+		printf("(%d*((%d+%d)*%d)",a,b,c,d);
+if(cheng(cheng(jian(b,c),d),a)==24)
+		printf("(%d*((%d-%d)*%d)",a,b,c,d);
+if(cheng(cheng(chu(b,c),d),a)==24)
+		printf("%d*(%d/%d)*%d",a,b,c,d);
+if(cheng(chu(jia(b,c),d),a)==24)
+		printf("%d*((%d+%d)/%d)",a,b,c,d);
+if(cheng(chu(jian(b,c),d),a)==24)
+		printf("%d*((%d-%d)/%d)",a,b,c,d);
+if(cheng(chu(chu(b,c),d),a)==24)
+		printf("%d*(%d/%d/%d)",a,b,c,d);//eawffffsadgfddasfgwd
+if(jia(jia(cheng(c,d),b),a)==24)
+		printf("%d+%d+(%d*%d)",a,b,c,d);//wenti
+if(jia(jia(chu(c,d),b),a)==24)
+		printf("%d+%d+(%d/%d)",a,b,c,d);
+
+if(jia(jian(b,cheng(c,d)),d)==24)
+		printf("%d+%d-(%d*%d)",a,b,c,d);
+if(jia(jian(b,chu(c,d)),a)==24)
+		printf("%d+%d-(%d/%d)",a,b,c,d);
+if(jia(cheng(jia(c,d),b),a)==24)
+		printf("%d+(%d*(%d+%d))",a,b,c,d);
+if(jia(cheng(jian(c,d),b),a)==24)
+		printf("%d+(%d*(%d-%d))",a,b,c,d);
+if(jia(chu(b,jia(c,d)),a)==24)
+		printf("%d+(%d/(%d+%d))",a,b,c,d);
+if(jia(chu(b,jian(c,d)),a)==24)
+		printf("%d+%d/(%d-%d)",a,b,c,d);
+if(jia(chu(b,chu(c,d)),d)==24)
+		printf("%d+(%d/(%d/%d))",a,b,c,d);
+     
+if(cheng(jia(cheng(c,d),b),a)==24)
+		printf("%d*(%d+%d*%d)",a,b,c,d);
+if(cheng(jia(chu(a,b),c),d)==24)
+		printf("(%d/%d+%d)*%d",a,b,c,d);
+if(cheng(jian(jia(a,b),c),d)==24)
+		printf("(%d+%d-%d)*%d",a,b,c,d);
+if(cheng(jian(jian(a,b),c),d)==24)
+		printf("(%d-%d-%d)*%d",a,b,c,d);
+if(cheng(jian(cheng(a,b),c),d)==24)
+		printf("(%d*%d-%d)*%d",a,b,c,d);
+if(cheng(jian(chu(a,b),c),d)==24)
+		printf("(%d/%d-%d)*%d",a,b,c,d);
+if(cheng(cheng(jia(a,b),c),d)==24)
+		printf("(%d+%d)*%d*%d",a,b,c,d);
+if(cheng(cheng(jian(a,b),c),d)==24)
+		printf("(%d-%d)*%d*%d",a,b,c,d);
+if(cheng(cheng(cheng(a,b),c),d)==24)
+		printf("%d*%d*%d*%d",a,b,c,d);
+if(cheng(cheng(chu(a,b),c),d)==24)
+		printf("%d/%d*%d*%d",a,b,c,d);
+if(cheng(chu(jia(a,b),c),d)==24)
+		printf("(%d+%d)/%d*%d",a,b,c,d);
+if(cheng(chu(jian(a,b),c),d)==24)
+		printf("(%d-%d)/%d*%d",a,b,c,d);
+if(cheng(chu(cheng(a,b),c),d)==24)
+		printf("%d*%d/%d*%d",a,b,c,d);
+if(cheng(chu(chu(a,b),c),d)==24)
+		printf("%d/%d/%d*%d",a,b,c,d);
+            
+
+}

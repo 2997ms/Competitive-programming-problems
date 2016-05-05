@@ -1,0 +1,102 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#pragma warning(disable:4996)
+using namespace std;
+
+int n,m;
+int state[15][15];
+long long result[15][(1<<13)-1];
+
+bool pend_ok(int pend,int row[])
+{
+	int i;
+	for(i=n;i>=1;i--)
+	{
+		int wei =pend & 1;
+		if(row[i]== 0 &&wei==1)//11001
+		{
+			return false;
+		}
+
+		pend = pend>>1;
+		
+		int wei2=pend&1;
+		
+		if(wei&&wei2)
+			return false;
+	}
+	return true;
+}
+
+bool pend(int j,int k )
+{
+	int i;
+	for(i=1;i<=n;i++)
+	{
+		int wei1 = j&1;
+		int wei2 = k&1;
+
+		if(wei1==1&&wei2==1)
+		{
+			return false;
+		}
+		j=j>>1;
+		k=k>>1;
+	}
+	return true;
+}
+
+int main()
+{	
+	int i,j,k;
+	cin>>m>>n;
+
+	for(i=1;i<=m;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+			scanf_s("%d",&state[i][j]);
+		}
+	}
+
+	int n1=(1<<n)-1;
+
+	memset(result,0,sizeof(result));
+
+	for(j=0;j<=n1;j++)
+	{
+		if(pend_ok(j,state[1]))
+		{
+			result[1][j]=1;
+		}
+	}
+
+	for(i=2;i<=m;i++)
+	{
+		for(j=0;j<=n1;j++)
+		{
+			for(k=0;k<=n1;k++)
+			{
+				if(pend_ok(j,state[i])&&pend(j,k))
+				{
+					result[i][j] += result[i-1][k];
+					if(result[i][j]>100000000)//result的值可能会超过，这里要先过滤一下！！！(之前没过滤导致wrong)
+						result[i][j]=result[i][j]-100000000;
+				}
+			}
+		}
+	}
+	long long max=0;
+	for(j=0;j<=n1;j++)
+	{
+		max +=result[m][j];
+		max=max%100000000;
+	}
+	
+	cout<<max%100000000<<endl;
+
+	return 0;
+}
