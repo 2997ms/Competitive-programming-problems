@@ -2,7 +2,6 @@
  题意是给出一棵树，要求树的直径小于等于k，求删去的点的最小数量。
  对每一个点，每一条边进行搜索，超过k/2的记录点的个数，求最小值。
  */
-//#pragma warning(disable:4996)
 #include <fstream>
 #include <iostream>
 #include <functional>
@@ -87,10 +86,7 @@ void solve()
 
 int main()
 {
-#ifndef ONLINE_JUDGE
-    freopen("/Users/2997ms/Desktop/eve/algorithm/algorithm/i.txt", "r", stdin);
-    //freopen("/Users/2997ms/Desktop/eve/algorithm/algorithm/o.txt", "w", stdout);
-#endif
+
     solve();
     return 0;
 }
