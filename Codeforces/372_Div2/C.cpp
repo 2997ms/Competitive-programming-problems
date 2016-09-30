@@ -47,7 +47,6 @@ void solve()
         return;
     }
     printf("2\n");
-    ll now = 6;
     for (ll i = 2; i <= n ; i++)
     {
         ll t = (1LL*i*(i + 1)*(i + 1) - (i - 1));
