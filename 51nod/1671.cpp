@@ -35,7 +35,7 @@ typedef long long ll;
 #define ss second
 #define pb push_back
 
-const int maxn = 500005;
+const int maxn = 500006;
 const ll mod = 1000000007;
 const double PI = acos(-1.0);
 
