@@ -3,7 +3,6 @@
  这个是曼哈顿距离，将其转换成切比雪夫距离之后，维护一个矩形就好了。
 */
 //#pragma comment(linker, "/STACK:102400000,102400000")
-#pragma warning(disable:4996)
 #include <fstream>
 #include <iostream>
 #include <functional>
