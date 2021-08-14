@@ -107,3 +107,77 @@ public class Main
         //System.out.println(x.toString());
     }
 }
+
+
+import java.io.*;
+import java.util.*;
+import java.math.*;
+ 
+public class Main {
+    static public void main(String[] args)
+    {
+        Scanner cin = new Scanner(new BufferedInputStream(System.in));
+        int t = cin.nextInt();
+        while (t-- != 0)
+        {
+            int a = cin.nextInt();
+            String s = cin.next();
+            char ch = s.charAt(0);
+            BigInteger ans = new BigInteger("1");
+            for (int i = 2; i <= a; i++)
+                ans = ans.multiply(BigInteger.valueOf(i));
+            s = ans.toString();
+            int len = s.length();
+            int x = 0;
+            for (int i = 0; i < len; i++)
+                if (s.charAt(i) == ch)
+                    x++;
+            System.out.println(x);
+        }
+    }
+}
+
+
+import java.io.*;
+import java.util.*;
+import java.math.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner cin=new Scanner(System.in);
+        BigInteger b;
+        BigInteger one=new BigInteger("1");
+        BigInteger zero=new BigInteger("0");
+        while(cin.hasNext()){
+            BigInteger a=new BigInteger("1");
+            b=cin.nextBigInteger();
+            if(b.equals(zero)){
+                break;
+            }
+            System.out.print(b);
+            for(; ; b=b.subtract(one)){
+                if(b.equals(zero)) break;
+                a=a.multiply(b);
+            }
+            String p=a.toString();
+            int len=p.length();
+            int res[]=new int[11];
+            for(int i=0; i<11; i++){
+                res[i]=0;
+            }
+            for(int i=0; i<len; i++){
+                if(p.charAt(i)=='0') res[0]++;
+                if(p.charAt(i)=='1') res[1]++;
+                if(p.charAt(i)=='2') res[2]++;
+                if(p.charAt(i)=='3') res[3]++;
+                if(p.charAt(i)=='4') res[4]++;
+                if(p.charAt(i)=='5') res[5]++;
+                if(p.charAt(i)=='6') res[6]++;
+                if(p.charAt(i)=='7') res[7]++;
+                if(p.charAt(i)=='8') res[8]++;
+                if(p.charAt(i)=='9') res[9]++;
+            }
+            System.out.printf("! --\n   (0)%5d    (1)%5d    (2)%5d    (3)%5d    (4)%5d\n   (5)%5d    (6)%5d    (7)%5d    (8)%5d    (9)%5d\n",res[0],res[1],res[2],res[3],res[4],res[5],res[6],res[7],res[8],res[9]);
+            
+        }
+    }
+}

@@ -16,8 +16,8 @@ struct string_hash
             k2[i] = k2[i-1]*SEED2;
         }
         for(int i=1; i<=n; i++) {
-            Hash1[i]=Hash1[i-1]*SEED1 + (s[i]-'a');
-            Hash2[i]=Hash2[i-1]*SEED2 + (s[i]-'a');
+            Hash1[i]=Hash1[i-1]*SEED1 + (s[i]-'a' + 1);
+            Hash2[i]=Hash2[i-1]*SEED2 + (s[i]-'a' + 1);
         }
     }
     ll get_val1(int i,int j) {

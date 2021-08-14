@@ -1,147 +1,301 @@
-// CF 1263E
-struct node {
-    int le, ri;
-    ll lazy;
-    ll minn;
-    ll maxx;
-    ll sum;
-} seg_tree[maxn * 4 + 5];
-struct segmentTree{
-    ll val[maxn];
-    
-    void pushup(int root) {
-        seg_tree[root].minn = min(seg_tree[root<<1].minn, seg_tree[root<<1|1].minn);
-        seg_tree[root].maxx = max(seg_tree[root<<1].maxx, seg_tree[root<<1|1].maxx);
-        seg_tree[root].sum = (seg_tree[root<<1].sum + seg_tree[root<<1|1].sum);
+// CF1526 C2
+
+#include <iostream>
+#include <functional>
+#include <algorithm>
+#include <sstream>
+#include <cstring>
+#include <vector>
+#include <string>
+#include <cstdio>
+#include <cmath>
+#include <queue>
+#include <stack>
+#include <deque>
+#include <ctime>
+#include <list>
+#include <set>
+#include <map>
+#include <ctime>        // std::time
+#include <cstdlib>      // std::rand, std::srand
+// #include <unordered_map>
+// #include <bitset>
+// #include <iomanip>
+
+using namespace std;
+ 
+typedef long long ll;
+typedef unsigned long long ull;
+#define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
+#define GET_POS(c,x) (lower_bound(c.begin(),c.end(),x)-c.begin())
+#define CASET int ___T; scanf("%d", &___T); for(int cs=1;cs<=___T;cs++)
+#define MS0(X) memset((X), 0, sizeof((X)))
+#define MS1(X) memset((X), -1, sizeof((X)))
+#define EPS 1e-9
+#define LL_INF 0x3fffffffffffffff
+#define MEM(a, b) memset(a, b, sizeof(a))
+#define PPER(i, n, m) for (int i = n; i >= m; i--)
+#define REPP(i, n, m) for (int i = n; i <= m; i++)
+#define REP(i, n, m) for (int i = n; i < m; i++)
+#define PER(i, n, m) for (int i = n; i > m; i--)
+#define SA(n) scanf("%d", &(n))
+#define SLLA(n) scanf("%lld", &(n))
+#define MP make_pair
+#define FF first
+#define SS second
+#define PB push_back
+#define DE(val) cout << #val << ": " << val << endl;
+// #define DBG(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
+// #else
+// #define DBG(...) 42
+// #endif
+const int dx44[6] = {0, -1, -1, 1, 1};
+const int dy44[6] = {0, -1, 1, -1, 1};
+const int dx4[8] = {0, 0, 1,-1,1,-1,0};
+const int dy4[8] = {1, -1, 0,0,1,-1,0};
+const int dx8[9] = {0, -1, 0, 1, 0, 1, 1, -1, -1};
+const int dy8[9] = {0, 0, 1, 0, -1, 1, -1, 1, -1};
+const int dx82[9] = {0, -1, -1, 1, 1, 2, 2, -2, -2};
+const int dy82[9] = {0, 2, -2, 2, -2, 1, -1, 1, -1};
+
+void update(ll& x,ll v){
+    if(x==-1)x=v;
+    else if(x>v)x=v;
+}
+ 
+ll po(ll a, ll b, ll mod)
+{
+    ll res = 1;
+    a %= mod;
+    for (; b; b >>= 1)
+    {
+        if (b & 1)
+            res = res * a % mod;
+        a = a * a % mod;
     }
-
-    void pushdown(int root) {
-        if(seg_tree[root].lazy) {
-            seg_tree[root<<1].sum += (seg_tree[root<<1].ri-seg_tree[root<<1].le+1)*seg_tree[root].lazy;
-            seg_tree[root<<1|1].sum += (seg_tree[root<<1|1].ri-seg_tree[root<<1|1].le+1)*seg_tree[root].lazy;
-            
-            seg_tree[root<<1].lazy += seg_tree[root].lazy;
-            seg_tree[root<<1].minn += seg_tree[root].lazy;
-            seg_tree[root<<1].maxx += seg_tree[root].lazy;
-            seg_tree[root<<1|1].lazy += seg_tree[root].lazy;
-            seg_tree[root<<1|1].minn += seg_tree[root].lazy;
-            seg_tree[root<<1|1].maxx += seg_tree[root].lazy;
-
-            seg_tree[root].sum = seg_tree[root<<1].sum + seg_tree[root<<1|1].sum; 
-            seg_tree[root].lazy = 0;
-        }
+    return res;
+}
+ll gcd(ll a, ll b)
+{
+    if (a == 0)
+    {
+        return b;
     }
-
-    void build(int root, int le, int ri) {
-        // cout<<root<<" "<<le<<" "<<ri<<endl;
-        seg_tree[root].le = le;
-        seg_tree[root].ri = ri;
-        if(le == ri) {
-            seg_tree[root].minn = 0;
-            seg_tree[root].maxx = 0;
-            seg_tree[root].lazy = 0;
-            seg_tree[root].sum = 0;
-        } else {
-            int mid = (le + ri) >> 1;
-            build(root << 1, le, mid);
-            build(root << 1 | 1, mid + 1, ri);
-            pushup(root);
-        }
+    else
+    {
+        return gcd(b % a, a);
     }
-    
-    void update(int root, int update_le, int update_ri, int val) {
-        if(update_le <= seg_tree[root].le && update_ri >= seg_tree[root].ri) {
-            seg_tree[root].lazy += val;
-            seg_tree[root].minn += val;
-            seg_tree[root].maxx += val;
-            seg_tree[root].sum += (seg_tree[root].ri-seg_tree[root].le+1)*val;
-            return;
-        }
-        pushdown(root);
-        int mid = (seg_tree[root].le + seg_tree[root].ri)/2;
-        if(update_le <= mid) {
-            update(root<<1, update_le, update_ri, val);
-        }
-        if(update_ri > mid) {
-            update(root<<1|1, update_le, update_ri, val);
-        }
-        pushup(root);
+}
+void extgcd(ll a, ll b, ll &d, ll &x, ll &y)
+{
+    if (!b)
+    {
+        d = a;
+        x = 1;
     }
-
-    node query(int root, int ask_le, int ask_ri) {
-        if (seg_tree[root].le >= ask_le && seg_tree[root].ri <= ask_ri) {
-            return seg_tree[root];
-        }
-        pushdown(root);
-        int mid = (seg_tree[root].le + seg_tree[root].ri) >> 1;
-        if (ask_ri <= mid) {
-            return query(root << 1, ask_le, ask_ri);
-        } else if (ask_le > mid) {
-            return query(root << 1 | 1, ask_le, ask_ri);
-        } else {
-            node res1 = query(root << 1, ask_le, ask_ri);
-            node res2 = query(root << 1 | 1, ask_le, ask_ri);
-            node res = res1;
-            res.sum = res1.sum+res2.sum;
-            res.minn = min(res1.minn, res2.minn);
-            res.maxx = max(res1.maxx, res2.maxx);
-            return res;
-        }
+    else
+    {
+        extgcd(b, a % b, d, y, x);
+        y -= x * (a / b);
     }
-}t;
+}
+ll inverse(ll a, ll n)
+{
+    ll d, x, y;
+    extgcd(a, n, d, x, y);
+    return d == 1 ? (x + n) % n : -1;
+}
+#define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
+const int maxn = 2e6 + 150;
+const double PI = acos(-1.0);
+#define mst(x, a) memset(x, a, sizeof(x))
+const double eps = 1e-10;
+/*************************************************************************/
 
-string s;
-int ss[maxn];
 
+#define MAXN 200010
+#define inf 0x3f3f3f3f
+
+ll dp[maxn];
+struct node{  
+    int l,r;//区间[l,r]  
+    ll add;//区间的延时标记  
+    ll sum;//区间和  
+    ll mx; //区间最大值  
+    ll mn; //区间最小值  
+}tree[MAXN<<2];//一定要开到4倍多的空间  
+  
+void pushup(int index){  
+    tree[index].sum = tree[index<<1].sum+tree[index<<1|1].sum;  
+    tree[index].mx = max(tree[index<<1].mx,tree[index<<1|1].mx);  
+    tree[index].mn = min(tree[index<<1].mn,tree[index<<1|1].mn);  
+}  
+void pushdown(int index){  
+    //说明该区间之前更新过  
+    //要想更新该区间下面的子区间，就要把上次更新该区间的值向下更新  
+    if(tree[index].add){  
+        //替换原来的值  
+        /* 
+        tree[index<<1].sum = (tree[index<<1].r-tree[index<<1].l+1)*tree[index].add; 
+        tree[index<<1|1].sum = (tree[index<<1|1].r-tree[index<<1|1].l+1)*tree[index].add; 
+        tree[index<<1].mx = tree[index].add; 
+        tree[index<<1|1].mx = tree[index].add; 
+        tree[index<<1].mn = tree[index].add; 
+        tree[index<<1|1].mn = tree[index].add; 
+        tree[index<<1].add = tree[index].add; 
+        tree[index<<1|1].add = tree[index].add; 
+        tree[index].add = 0;*/  
+        //在原来的值的基础上加上val  
+          
+        tree[index<<1].sum += (tree[index<<1].r-tree[index<<1].l+1)*tree[index].add;  
+        tree[index<<1|1].sum +=(tree[index<<1|1].r-tree[index<<1|1].l+1)*tree[index].add;  
+        tree[index<<1].mx += tree[index].add;  
+        tree[index<<1|1].mx += tree[index].add;  
+        tree[index<<1].mn += tree[index].add;  
+        tree[index<<1|1].mn += tree[index].add;  
+        tree[index<<1].add += tree[index].add;  
+        tree[index<<1|1].add += tree[index].add;  
+        tree[index].add = 0;  
+  
+    }  
+}  
+void build(int l,int r,int index){  
+    tree[index].l = l;  
+    tree[index].r = r;  
+    tree[index].add = 0;//刚开始一定要清0  
+    if(l == r){  
+        //scanf("%d",&tree[index].sum);  
+        tree[index].mn = tree[index].mx = tree[index].sum = dp[l];  
+        return ;  
+    }  
+    int mid = (l+r)>>1;  
+    build(l,mid,index<<1);  
+    build(mid+1,r,index<<1|1);  
+    pushup(index);  
+}  
+void updata(int l,int r,int index,ll val){  
+    if(l <= tree[index].l && r >= tree[index].r){  
+        /*把原来的值替换成val,因为该区间有tree[index].r-tree[index].l+1 
+        个数，所以区间和 以及 最值为： 
+        */  
+        /*tree[index].sum = (tree[index].r-tree[index].l+1)*val; 
+        tree[index].mn = val; 
+        tree[index].mx = val; 
+        tree[index].add = val;//延时标记*/  
+        //在原来的值的基础上加上val,因为该区间有tree[index].r-tree[index].l+1  
+        //个数，所以区间和 以及 最值为：  
+        tree[index].sum += (tree[index].r-tree[index].l+1)*val;  
+        tree[index].mn += val;  
+        tree[index].mx += val;  
+        tree[index].add += val;//延时标记  
+  
+        return ;  
+    }  
+    pushdown(index);  
+    int mid = (tree[index].l+tree[index].r)>>1;  
+    if(l <= mid){  
+        updata(l,r,index<<1,val);  
+    }  
+    if(r > mid){  
+        updata(l,r,index<<1|1,val);  
+    }  
+    pushup(index);  
+}  
+ll query(int l,int r,int index){  
+    if(l <= tree[index].l && r >= tree[index].r){  
+        //return tree[index].sum;  
+        return tree[index].mn;  
+        //return tree[index].mn;  
+    }  
+    pushdown(index);  
+    int mid = (tree[index].l+tree[index].r)>>1;  
+    ll ans = 0;  
+    ll Max = 0;  
+    ll Min = 1e18;  
+    // DE(Min)
+    if(l <= mid){  
+        // ll 
+        // ans += query(l,r,index<<1);  
+        // Max = max(query(l,r,index<<1),Max);  
+        Min = min(query(l,r,index<<1),Min);  
+    }  
+    if(r > mid){  
+        // ans += query(l,r,index<<1|1);  
+        // Max = max(query(l,r,index<<1|1),Max);  
+        Min = min(query(l,r,index<<1|1),Min);  
+    }  
+    //return ans;  
+    return Min;  
+    //return Min;  
+}  
+
+int n;
+int val[maxn];
+std::vector< pair<ll,int> > v;
+inline bool scan_d(int &num)
+{
+        char in;bool IsN=false;
+        in=getchar();
+        if(in==EOF) return false;
+        while(in!='-'&&(in<'0'||in>'9')) in=getchar();
+        if(in=='-'){ IsN=true;num=0;}
+        else num=in-'0';
+        while(in=getchar(),in>='0'&&in<='9'){
+                num*=10,num+=in-'0';
+        }
+        if(IsN) num=-num;
+        return true;
+}
 void solve() {
-    int n;
-    scanf("%d",&n);
-    n=n+5;
-
-    t.build(1,1,n);
-    
-    cin>>s;
-    int pos = 1;
-    vector<int>ans;
-    for(int i=0;i<s.size();i++){
-        if(s[i]=='('){
-            t.update(1,pos,n,1-ss[pos]);
-            ss[pos]=1;
-        }else if(s[i]==')'){
-            t.update(1,pos,n,-1-ss[pos]);
-            ss[pos]=-1;
-        }else if(s[i]=='L'){
-            if(pos>1)pos--;
-        }else if(s[i]=='R'){
-            pos++;
-        }else{
-            if(ss[pos]==1){
-                t.update(1,pos,n,-1);
-            }else if(ss[pos]==-1){
-                t.update(1,pos,n,1);
-            }
-            ss[pos]=0;
+    scan_d(n);
+    int ans = 0;
+    ll cur = 0;
+    REPP(i,1,n) {
+        scan_d(val[i]);
+        if(val[i] >= 0) {
+            ans++;
+            cur += val[i];
+        } else {
+            v.push_back(MP(val[i], i));
         }
-        node ansnode = t.query(1,1,n);
-        node sumnode = t.query(1,n,n);
-        // cout<<ansnode.minn<<" "<<ansnode.sum<<" "<<ansnode.maxx<<endl;
-        if(ansnode.minn==0&&sumnode.sum==0){
-            ans.push_back(ansnode.maxx);
-        }else{
-            ans.push_back(-1);
+        dp[i] = cur;
+    }
+    build(1,n,1);
+    sort(v.begin(), v.end());
+    reverse(v.begin(), v.end());
+    int p = 0;
+    REP(i,0,v.size()) {
+        ll vs = v[i].first;
+        int pos = v[i].second;
+        if(pos <= p) {
+            continue;
+        }
+        ll minn = query(pos, n, 1);
+        // cout<<vs<<" "<<pos<<" "<<minn<<endl;
+        if(minn + vs >= 0) {
+            ans++;
+            updata(pos, n,1, vs);
+        } else {
+            p = max(p, pos);
         }
     }
-    for(int i=0;i<ans.size();i++){
-        cout<<ans[i]<<" ";
-    }
-    cout<<endl;
+    printf("%d\n", ans);
 }
 
-int main()
-{   
-    solve();
+int main() {   
+#ifndef ONLINE_JUDGE
+    //freopen("i.txt", "r", stdin);
+    // freopen("o.txt", "w", stdout);
+#endif
+     // ios::sync_with_stdio(false);
+     // cin.tie();
+    int t = 1;
+    // SA(t);
+    REPP(i,1,t) {
+        solve();
+    }
 
+    // std::vector<std::vector<int> > v = {{0,5},{1,2},{0,2},{0,5},{1,3}};
+    // std::vector<int> q = {2,3};
     return 0;
- 
 }
- 

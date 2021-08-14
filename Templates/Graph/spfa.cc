@@ -27,3 +27,34 @@ struct Graph {
         }
     }
 }gh;
+
+using P = pair<int, int>;
+using T = tuple<int, int, int>;
+
+int dx[4] = {-1, 1, 0, 0};
+int dy[4] = {0, 0, -1, 1};
+
+struct edge {
+  int to, cost;
+};
+
+vector<int> dijkstra(const vector<vector<edge>> &g, int s) {
+  vector<int> d(g.size(), INF);
+  priority_queue<pair<ll,ll>, vector<pair<ll,ll>>, greater<pair<ll,ll>>> que;
+  d[s] = 0;
+  que.emplace(0, s);
+  while (!que.empty()) {
+    auto p = que.top();
+    que.pop();
+    int u = p.second;
+    if (d[u] < p.first) continue;
+    for (auto &e : g[u]) {
+      int v = e.to;
+      if (d[v] > d[u] + e.cost) {
+        d[v] = d[u] + e.cost;
+        que.emplace(d[v], v);
+      }
+    }
+  }
+  return d;
+}

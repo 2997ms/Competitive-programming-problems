@@ -3,23 +3,23 @@ struct node{
     int v, next;
 }edge[4005];
 int head[1005], num[1005], low[1005], ans[1005];
-int n, m, no, index, root;
+int n, m, no, all, root;
 void add(int u, int v){
     edge[no].v = v;
     edge[no].next = head[u];
     head[u] = no++;
 }
 void init(){
-    no = 1, index = 0, root = 1;
+    no = 1, all = 0, root = 1;
     memset(head, -1, sizeof head);
     memset(ans, 0, sizeof ans);
     memset(num, 0, sizeof num);
 }
 void dfs(int cur, int father){
     int child = 0;
-    ++index;
-    num[cur] = index;
-    low[cur] = index;
+    ++all;
+    num[cur] = all;
+    low[cur] = all;
     int k = head[cur];
     while(k != -1){
         if(num[edge[k].v] == 0){
